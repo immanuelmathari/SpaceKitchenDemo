@@ -1,7 +1,10 @@
 import { Platform, Pressable, StyleSheet, Text, View } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 function CategoryGridTile({title, color, onPress})
 {
+    const navigation = useNavigation();  // this allows you to use the navigation prop without passing it down from the parent component and also if it is not defined in the parent component as a screen prop
+
     return (
         // <View style={[styles.gridItem,  {backgroundColor: color}]}>
         <View style={styles.gridItem}>
