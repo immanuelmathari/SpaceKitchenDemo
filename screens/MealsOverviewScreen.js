@@ -1,13 +1,24 @@
 import { FlatList, StyleSheet, Text, View } from "react-native";
-import { MEALS } from "../data/dummy-data";
+import { CATEGORIES, MEALS } from "../data/dummy-data";
 import MealItem from "../components/MealItem";
+import {  useEffect, useLayoutEffect } from "react";
 
-function MealOverviewScreen({ route })
+function MealOverviewScreen({ route, navigation })
 {
     const categoryId = route.params.categoryId;
     const displayedMeals = MEALS.filter((meal) => {
         return meal.categoryIds.indexOf(categoryId) >= 0;
-    })
+    });
+
+    useLayoutEffect(() => {
+        const categoryTitle = CATEGORIES.find((category) => category.id === categoryId).title;
+    
+        navigation.setOptions({
+            title: categoryTitle,
+        });
+
+    }, [categoryId, navigation]);
+
 
     // we define this function in here because we shall need a prop defined here
     function renderMealItem(itemData) {

@@ -18,7 +18,12 @@ export default function App() {
         {/* we will register a screen that that will be managed by this navigator */}
         {/* <Stack.Screen name="MealsCategories" component={CategoriesScreen} options={{ title: 'All Categories', headerStyle: { backgroundColor: '#351401'} , headerTintColor: 'white' , contentStyle: { backgroundColor: '#3f2f25'} }}/>  */}
         <Stack.Screen name="MealsCategories" component={CategoriesScreen} options={{ title: 'All Categories' }}/> 
-        <Stack.Screen name="MealsOverview" component={MealsOverviewScreen} />
+        <Stack.Screen name="MealsOverview" component={MealsOverviewScreen} options={({ route, navigation }) => {
+          const categoryId = route.params.categoryId;
+          return {
+            title: categoryId,
+          };
+        }} />
       </Stack.Navigator>
       {/* <CategoriesScreen /> */}
     </NavigationContainer>
