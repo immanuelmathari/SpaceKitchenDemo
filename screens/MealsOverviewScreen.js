@@ -11,8 +11,17 @@ function MealOverviewScreen({ route })
 
     // we define this function in here because we shall need a prop defined here
     function renderMealItem(itemData) {
-        return <MealItem title={itemData.item.title} />
-    }
+        // console.log(itemData);
+        const item = itemData.item;
+        const mealItemProps = {
+            title: item.title,
+            imageUrl: item.imageUrl,
+            affordability: item.affordability,
+            complexity: item.complexity,
+            duration: item.duration,
+        };
+        return <MealItem {...mealItemProps} />
+    };
 
     return (
         <View style={styles.container}>
