@@ -1,9 +1,10 @@
-import { Button, Image, ScrollView, StyleSheet, Text, View } from "react-native";
+import { Button, Image, Pressable, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { MEALS } from "../data/dummy-data";
 import MealDetails from "../components/MealDetails";
 import Subtitle from "../components/MealDetail/Subtitle";
 import List from "../components/MealDetail/List";
 import { useLayoutEffect } from "react";
+import IconButton from "../components/IconButton";
 
 function MealDetailsScreen({ route, navigation })
 {
@@ -16,8 +17,17 @@ function MealDetailsScreen({ route, navigation })
 
     useLayoutEffect(() => {
         navigation.setOptions({
-            headerRight: () => {
-                return <Button title="Tapo" onPress={headerButtonPressHandler} />
+            // headerRight: () => ( 
+                
+            //     // <Button title="Tapo" onPressOut={headerButtonPressHandler} />
+            //         <Pressable onPressOut={headerButtonPressHandler}>
+            //             <Text style={{ color: "white", fontSize: 16, padding: 10 }}>Tapo</Text>
+            //         </Pressable>
+            // )
+            headerRight: () => { 
+                return (
+                    <IconButton onPressOut={headerButtonPressHandler}  icon="star" color="white" />
+                )
             }
         });
     }, [navigation, headerButtonPressHandler]);
