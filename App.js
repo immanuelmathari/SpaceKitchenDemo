@@ -9,6 +9,8 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import FavoriteScreen from './screens/FavoriteScreen';
 import { Ionicons } from '@expo/vector-icons';
 import FavoritesContextProvider from './store/context/favorite-context';
+import { Provider } from 'react-redux';
+import { store } from './store/redux/store';
 
 
 // we create a stack of screens
@@ -43,7 +45,8 @@ export default function App() {
     */} 
 
     <StatusBar style='light' />
-    <FavoritesContextProvider>
+    {/* <FavoritesContextProvider> */}
+    <Provider store={store}>
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerStyle: { backgroundColor: '#351401'} , headerTintColor: 'white' , contentStyle: { backgroundColor: '#3f2f25'} }}>
         {/* we will register a screen that that will be managed by this navigator */}
@@ -63,7 +66,8 @@ export default function App() {
       </Stack.Navigator>
       {/* <CategoriesScreen /> */}
     </NavigationContainer>
-    </FavoritesContextProvider>
+    </Provider>
+    {/* </FavoritesContextProvider> */}
     </>
   );
 }
