@@ -6,24 +6,33 @@ import List from "../components/MealDetail/List";
 import { useContext, useLayoutEffect } from "react";
 import IconButton from "../components/IconButton";
 import { FavoriteContext } from "../store/context/favorite-context";
+import { useDispatch, useSelector } from "react-redux";
+import { addFavorite, removeFavorite } from "../store/redux/favorites";
 
 function MealDetailsScreen({ route, navigation })
 {
-    const favoriteMealContext = useContext(FavoriteContext);
+    // const favoriteMealContext = useContext(FavoriteContext);
+    const favoriteMealIds = useSelector((state) => state.favoriteMeals.ids);
+    const dispatch = useDispatch();
+
     const mealId = route.params.mealId;
     const selectedMeal = MEALS.find((meal) => meal.id === mealId);
 
     /// we want to find out if in this ids array, we have this mealID
     // include works well on primitive values and will return true of this is mealId is part of the ids array
-    const mealsFavorite = favoriteMealContext.ids.includes(mealId);
+    // const mealsFavorite = favoriteMealContext.ids.includes(mealId);
+    const mealsFavorite = favoriteMealIds.includes(mealId);
 
     function headerButtonPressHandler(){
         console.log('oh, you pressed me.')
         if (mealsFavorite) {
             // unfavorite it 
-            favoriteMealContext.removeFavorite(mealId);
+            // favoriteMealContext.removeFavorite(mealId);
+            // pass the payload
+            dispatch(removeFavorite({ id : mealId}));
         } else {
-            favoriteMealContext.addFavorite(mealId);
+            // favoriteMealContext.addFavorite(mealId);
+            dispatch(addFavorite({ id: mealId}));
         }
     }
 
