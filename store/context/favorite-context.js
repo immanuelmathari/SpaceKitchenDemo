@@ -1,14 +1,14 @@
 import { createContext, useState } from "react";
 
 // this name should start with uppercase character
-const FavoriteContext = createContext({
+export const FavoriteContext = createContext({
     ids: [],
     addFavorite: (id) => {},
     removeFavorite: (id) => {},
 });
 
-function FavoritesContextProvider({}) {
-    const [favoriteMealIds, setFavoriteMealIds] = useState();
+function FavoritesContextProvider({ children }) {
+    const [favoriteMealIds, setFavoriteMealIds] = useState([]);
 
     function addFavorite(id){
         // we spread our id our current ids and add the new one
