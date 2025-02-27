@@ -3,16 +3,28 @@ import { MEALS } from "../data/dummy-data";
 import MealDetails from "../components/MealDetails";
 import Subtitle from "../components/MealDetail/Subtitle";
 import List from "../components/MealDetail/List";
-import { useLayoutEffect } from "react";
+import { useContext, useLayoutEffect } from "react";
 import IconButton from "../components/IconButton";
+import { FavoriteContext } from "../store/context/favorite-context";
 
 function MealDetailsScreen({ route, navigation })
 {
+    const favoriteMealContext = useContext(FavoriteContext);
     const mealId = route.params.mealId;
     const selectedMeal = MEALS.find((meal) => meal.id === mealId);
 
+    /// we want to find out if in this ids array, we have this mealID
+    // include works well on primitive values and will return true of this is mealId is part of the ids array
+    const mealsFavorite = favoriteMealContext.ids.includes(mealId);
+
     function headerButtonPressHandler(){
         console.log('oh, you pressed me.')
+        if (mealsFavorite) {
+            // unfavorite it 
+            favoriteMealContext.removeFavorite(mealId);
+        } else {
+            favoriteMealContext.addFavorite(mealId);
+        }
     }
 
     useLayoutEffect(() => {
@@ -26,7 +38,8 @@ function MealDetailsScreen({ route, navigation })
             // )
             headerRight: () => { 
                 return (
-                    <IconButton onPressOut={headerButtonPressHandler}  icon="star" color="white" />
+                    // <IconButton onPressOut={headerButtonPressHandler}  icon="star" color="white" />
+                    <IconButton onPressOut={headerButtonPressHandler}  icon={mealsFavorite ? 'star' : 'star-outline'} color="white" />
                 )
             }
         });
