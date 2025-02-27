@@ -1,7 +1,8 @@
 import { FlatList, StyleSheet, Text, View } from "react-native";
 import { CATEGORIES, MEALS } from "../data/dummy-data";
-import MealItem from "../components/MealItem";
+import MealItem from "../components/MealsList/MealItem";
 import {  useEffect, useLayoutEffect } from "react";
+import MealsList from "../components/MealsList/MealsList";
 
 function MealOverviewScreen({ route, navigation })
 {
@@ -20,9 +21,9 @@ function MealOverviewScreen({ route, navigation })
     }, [categoryId, navigation]);
 
 
-    // we define this function in here because we shall need a prop defined here
+    /*
+    we cut this from here to MealsList.js
     function renderMealItem(itemData) {
-        // console.log(itemData);
         const item = itemData.item;
         const mealItemProps = {
             id: item.id,
@@ -41,13 +42,10 @@ function MealOverviewScreen({ route, navigation })
             <FlatList data={displayedMeals} keyExtractor={(item) => item.id} renderItem={renderMealItem} />
         </View>
     )
+        */
+
+    return <MealsList displayedMeals={displayedMeals} />
 }
 
 export default MealOverviewScreen;
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        padding: 16, 
-    },
-});
