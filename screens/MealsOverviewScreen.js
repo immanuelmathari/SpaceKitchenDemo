@@ -6,6 +6,8 @@ import MealsList from "../components/MealsList/MealsList";
 
 function MealOverviewScreen({ route, navigation })
 {
+    // this is 006 the one after CategoryGridTile.js
+    // this is the screen that will show the meals of the selected category.
     const categoryId = route.params.categoryId;
     const displayedMeals = MEALS.filter((meal) => {
         return meal.categoryIds.indexOf(categoryId) >= 0;

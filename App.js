@@ -27,8 +27,8 @@ function DrawerNavigator() {
 export default function App() {
   return (
     <>
-    {/* 
-    <StatusBar style='light' />
+    
+    {/* <StatusBar style='light' />
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerStyle: { backgroundColor: '#351401'} , headerTintColor: 'white' , contentStyle: { backgroundColor: '#3f2f25'} }}>
         <Stack.Screen name="MealsCategories" component={CategoriesScreen} options={{ title: 'All Categories' }}/> 
@@ -42,11 +42,12 @@ export default function App() {
         />
       </Stack.Navigator>
     </NavigationContainer>
-    */} 
+     */}
 
-    <StatusBar style='light' />
+<StatusBar style='light' />
     {/* <FavoritesContextProvider> */}
     <Provider store={store}>
+      {/* 005 navigation starts here */}
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerStyle: { backgroundColor: '#351401'} , headerTintColor: 'white' , contentStyle: { backgroundColor: '#3f2f25'} }}>
         {/* we will register a screen that that will be managed by this navigator */}
@@ -68,6 +69,9 @@ export default function App() {
     </NavigationContainer>
     </Provider>
     {/* </FavoritesContextProvider> */}
+
+
+    
     </>
   );
 }

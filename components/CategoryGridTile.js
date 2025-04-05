@@ -6,8 +6,11 @@ function CategoryGridTile({title, color, onPress})
     const navigation = useNavigation();  // this allows you to use the navigation prop without passing it down from the parent component and also if it is not defined in the parent component as a screen prop
 
     return (
+        // 004 we use the Pressable component to make the grid tile clickable and we use the android_ripple prop to add a ripple effect on android devices. 
+        // here we create the grid tile to make the grids of categories.
         // <View style={[styles.gridItem,  {backgroundColor: color}]}>
         <View style={styles.gridItem}>
+            {/* this on press prop is what defines what happens when we click the tile */}
             <Pressable android_ripple={{color: '#ccc'}} style={({ pressed }) => [styles.buttonContainer, pressed ? styles.buttonPressed : null]} onPress={onPress}>
                 <View style={[styles.innerContainer, {backgroundColor: color}]}>
                     <Text style={styles.title}>{title}</Text>
@@ -34,6 +37,7 @@ const styles = StyleSheet.create({
         shadowOffset: {width: 0, height: 2},
         shadowRadius: 8,
         // overflow: 'hidden', // to make sure that the ripple effect does not go beyond the border radius 
+        // platform specific styles
         overflow: Platform.OS === 'android' ? 'hidden' : 'visible', // to make sure that the ripple effect does not go beyond the border radius 
     },
     buttonContainer: {
