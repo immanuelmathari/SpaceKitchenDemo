@@ -619,3 +619,132 @@ we use useSelector()
 7.123 Using Redux State in Components 27/02
 FavoriteScreen.js
 
+
+## What we learn
+In this React Native App, we fetch a list of meals and meal categories. A category could contain sub-categories such as meals that are Quick and Easy can have sub-categories such as Spaghetti with Sauce, Toast Hawaii. Each meal item has its ingredients and Steps needed to cook. You can add a meal to favorite and remove it. There is easy navigation of a drawer navigator. Enjoy the slides for now though
+
+1. Navigation 
+- You want to be able to easily navigate through screens
+2. Context API
+- you want to be able to handle App Wide State through out the app
+3. Route Parameters
+- you want to extract information passed onto via the url or the route. 
+4. Working with Complex List
+- You want to use KeyExtractors to have keys for lists even when id is not specifically set
+5. Formatting Constructors
+- You want to have a modular way to structure your data throughout the app
+6. Working with items in a Grid
+- We structure lists in a grid and make sure they are responsive
+
+# SECTION 14
+using expo
+how expo works.
+- expo helps us to preview our app during development
+- expo installs an extra runtime on your device or emulator. and in development, when you write your code, its loaded in the expo go runtime, and you can instantly preview your code. 
+- but your dont build real app executables during development. instead, your source code is injected into the expo Go client app and executed there. 
+- this is a helper during development. 
+
+- we were using expo managed workflow. 
+- in this, we can have something which alot of configurations are taken away from us so that we dont have to worry about them.
++ve easy to set up and work with 
++ve quick & frictionless development 
++ve no or very little configuration required
++ve build cross-platform standalone apps
+- another way is expo "Bare workflow"
++ve if we need to write our own code in C, or Kotlin or Swift and mix it with react native we use Bare workflow 
++ve relatively easy to set up & work with
++ve convenient development
++ve some configuration required 
++ve you can build cross plaform standalone apps
+- the other way is React Native CLI
+-ve more complex settings
+-ve has more configuration effort
+-ve you cant build ios apps on windows
+
+13.225 Setting up our System
+search
+expo bare workflow
+> expo init 
+- you have to do settings for both ios and android 
+- you start ios emulators by
+> expo run:ios (if using mac) 
+- android by
+> expo run:android
+- so the difference in coding is that say for managed workflows when you use expo install expo-location, 
+you have to add more configurations for permissions in ios/projectname/Info.plist
+then you need to run 
+> npx pod-install
+- to move from managed to bare
+> expo exit
+- you can learn more about workflows. 
+- it will come with all you code upto that point plus extra configurability
+- you can also check how to build a RN app without expo
+> npx react-native-init AwesomeProject
+or 
+> npm install -g react-native-cli
+> react-native init AwesomeProject
+
+Publishing your app
+With Expo 
+Managed Apps | Bare workflow
++ve configure your project
++ve build the actual app binaries, the installable app files that can be installed in the users physical device. for this we use Expo's cloud service. +ve we dont use local resources to build. and you can build for all target platforms ios and android. the cloud services does this for us. even if we dont own a MAC
+
+Key Configurations 
+1. Permissions. Control Permissions requested and shown in app store 
+2. App name & Identifier. Set the visible app name, an app version and a unique app Identifier (ID)
+3. Environment Variables. Store app-wide variables securely API ekys
+4. Icons and Splash Screen. Configure and generate fitting icons and loading screens
+
+- you need to go through this
+https://docs.expo.dev/eas-update/introduction/
+- this is the service we use to build our apps in the cloud and the cloud gives it directly to app stores. 
+
+- so go to 
+app.json 
+in Space Kitchen Meals App
+go see 
+API Reference 
+Expo SDK
+- we see versioning Code by adding the version numbers when you change the version
+- another advantage of expo is that it creates multiple versions of the icon for different screen sizes. you dont need to manually have those different versions.
+
+to use EAS (the cloud service)
+- create an expo user account
+- so we created the account
+https://expo.dev/onboarding/hello
+
+- next is install the latest EAS CLI
+> npm install -g eas-cli
+> eas login
+- login eas credentails (lazygenius in nunu expo)
+> eas build:configure
+- adds eas.jaon
+- we want to have a build for also simulators to test the build project before we foward it to the stores. 
+- there are different builds
+search
+Build for Android Emulator/device or iOS Simulator
+https://docs.expo.dev/tutorial/eas/configure-development-build/
+creating an installable APK for Android 
+                                Ios
+eas.json
+- you set the build type to apk in eas.json
+> eas build --platform android --profile preview
+- profile says we use the profile weve set in eas.json and its meant to be for android
+- next we get to be asked how we want our id to look like 
+com.lazygenius.SpaceKitchenMealsAppRN
+- this gets added in app.json
+- create a new Android Keystore? Y 
+- the above is required for signing the app to ensure only you can update it
+- with this our project is uploaded to eas cloud
+
+- ati to publish your app to playstore you need to pay a one time 25dollar fee
+https://docs.expo.dev/build/setup/
+
+for IOS, have the 
+eas.json
+preview 
+ios simulator true
+- then you run
+> eas build --platform ios --profile preview
+- then you add the app id, 
